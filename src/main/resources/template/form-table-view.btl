@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>${title}</title>
+    <style>
+        .form-table {
+            border: 1px solid #000;
+            border-width: 1px 0 0 1px;
+            margin: 2px 0 2px 0;
+            border-collapse: collapse;
+        }
+
+        .form-table-tr {
+            border: 1px solid #000;
+            border-width: 0 1px 1px 0;
+            margin: 2px 0 2px 0;
+        }
+
+        .form-table-td {
+            border: 1px solid #000;
+            border-width: 0 1px 1px 0;
+            margin: 2px 0 2px 0;
+        }
+    </style>
+</head>
+<body>
+<div style="width:700px">
+    ${table}
+</div>
+</body>
+</html>
