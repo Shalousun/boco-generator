@@ -52,6 +52,9 @@ public class ExcelToHtml {
                     for (int rowNum = firstRowNum; rowNum <= lastRowNum; rowNum++) {
                         if (sheet.getRow(rowNum) != null) {// 如果行不为空，
                             Row row = sheet.getRow(rowNum);
+                            if(row.getFirstCellNum()<0){
+                                throw new RuntimeException("The "+rowNum+" row is empty in the  sheet of "+sheetName);
+                            }
                             int height = (int) (row.getHeight() / 15.625); // 行的高度
                             sheetBuffer.append("    <tr height=\"" + height + "\" class=\"form-table-tr\">\n");
                             createTD(sheetBuffer, sheet, rowNum);
