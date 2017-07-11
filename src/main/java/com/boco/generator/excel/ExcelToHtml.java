@@ -18,17 +18,18 @@ public class ExcelToHtml {
 
     /**
      * 将excle转化成html
-     * @param fileName
-     *          文件名称
+     *
+     * @param fileName 文件名称
      * @return
      */
-    public static Map<String,StringBuffer> excelToHtml(final String fileName){
+    public static Map<String, StringBuffer> excelToHtml(final String fileName) {
         Workbook workbook = ExcelWorkBook.createWorkbook(fileName);
         return ExcelToHtml.excelToHtml(workbook);
     }
 
     /**
      * 将excel转化成html
+     *
      * @param workbook
      * @return
      */
@@ -52,8 +53,8 @@ public class ExcelToHtml {
                     for (int rowNum = firstRowNum; rowNum <= lastRowNum; rowNum++) {
                         if (sheet.getRow(rowNum) != null) {// 如果行不为空，
                             Row row = sheet.getRow(rowNum);
-                            if(row.getFirstCellNum()<0){
-                                throw new RuntimeException("The "+rowNum+" row is empty in the  sheet of "+sheetName);
+                            if (row.getFirstCellNum() < 0) {
+                                throw new RuntimeException("The " + rowNum + " row is empty in the  sheet of " + sheetName);
                             }
                             int height = (int) (row.getHeight() / 15.625); // 行的高度
                             sheetBuffer.append("    <tr height=\"" + height + "\" class=\"form-table-tr\">\n");
@@ -103,10 +104,14 @@ public class ExcelToHtml {
                     buffer.append(" valign=\"").append(vAlign).append("\"");
                     buffer.append(" width=\"").append(width).append("\"");
 
-                    buffer.append(" colspan=\"").append(cellRegionCol).append("\"");
-                    buffer.append(" rowspan=\"").append(cellRegionRow).append("\"");
+                    //handle for firefox
+                    if (cellRegionCol != 0) {
+                        buffer.append(" colspan=\"").append(cellRegionCol).append("\"");
+                    }
+                    if (cellRegionRow != 0) {
+                        buffer.append(" rowspan=\"").append(cellRegionRow).append("\"");
+                    }
                     buffer.append(">").append(getCellValue(cell)).append("</td>\n");
-
                 }
             }
         }
