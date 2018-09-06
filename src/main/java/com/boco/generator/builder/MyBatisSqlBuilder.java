@@ -3,7 +3,7 @@ package com.boco.generator.builder;
 
 
 import com.boco.generator.annotation.Table;
-import com.boco.generator.util.StringUtil;
+import com.power.common.util.StringUtil;
 
 import java.lang.reflect.Field;
 
@@ -174,13 +174,12 @@ public class MyBatisSqlBuilder {
 	}
 	@SuppressWarnings("unchecked")
 	public static String getTableName(Class clazz) {
-		String str = null;
+		String str;
 		Table annotation = (Table) clazz.getAnnotation(Table.class);
 		if (annotation != null) {
 			str = annotation.name();
 		}else{
 			str = "t"+StringUtil.camelToUnderline(clazz.getSimpleName());
-			//throw new RuntimeException(clazz + EXCEPTION_MSG);
 		}
 		return str;
 	}

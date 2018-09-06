@@ -1,7 +1,8 @@
 package com.boco.generator.builder;
 
-import com.boco.generator.util.DateTimeUtil;
-import com.boco.generator.util.StringUtil;
+
+import com.power.common.util.DateTimeUtil;
+import com.power.common.util.StringUtil;
 
 public class JqueryPluginBuilder {
 	public static String buildJqueryPlugin(String pluginName){

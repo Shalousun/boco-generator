@@ -1,10 +1,8 @@
 package com.boco.generator.excel;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import com.power.poi.excel.ExcelPubUtil;
+import com.power.poi.excel.ExcelWorkBook;
+import org.apache.poi.ss.usermodel.*;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -15,13 +13,13 @@ import java.util.Map;
  */
 public class ExcelToBootstrapTable {
 
-    public static Map<String,StringBuilder> generateHtml(InputStream inputStream){
+    public static Map<String, StringBuilder> generateHtml(InputStream inputStream) {
 
         Workbook workbook = ExcelWorkBook.createWorkbook(inputStream);
         //get total of sheets
         int totalSheets = workbook.getNumberOfSheets();
         //封装每个sheet的数据
-        Map<String,StringBuilder> map = new HashMap<>(totalSheets);
+        Map<String, StringBuilder> map = new HashMap<>(totalSheets);
         Sheet sheet;
         String sheetName;
         try {
@@ -60,8 +58,9 @@ public class ExcelToBootstrapTable {
                             //遍历每一个单元格
                             for(short cellNum = firstCellNum; cellNum <= lastCellNum; cellNum++){
                                 Cell cell = row.getCell(cellNum);
+                                CellType cellType = cell.getCellTypeEnum();
                                 if(null != cell){
-                                    if (cell.getCellType() == HSSFCell.CELL_TYPE_BLANK) {
+                                    if (cellType == CellType.BLANK) {
                                         continue;
                                     } else {
                                         //// 合并的列（solspan）
@@ -71,10 +70,10 @@ public class ExcelToBootstrapTable {
                                         if(cellRegionCol>0||cellRegionRow>0){
                                             hasMerge = true;
                                             String value = "";
-                                            if (cell.getCellType() == HSSFCell.CELL_TYPE_BLANK) {
+                                            if (cellType == CellType.BLANK) {
                                                 value = "";
                                             }else{
-                                                cell.setCellType(Cell.CELL_TYPE_STRING);
+                                                cell.setCellType(CellType.STRING);
                                                 value = cell.getStringCellValue();
                                             }
                                             if(cellNum==firstCellNum){
@@ -108,10 +107,10 @@ public class ExcelToBootstrapTable {
                                             builder.append("");
                                         }else{
                                             String value = "";
-                                            if (cell.getCellType() == HSSFCell.CELL_TYPE_BLANK) {
+                                            if (cellType == CellType.BLANK) {
                                                 value = "";
                                             }else{
-                                                cell.setCellType(Cell.CELL_TYPE_STRING);
+                                                cell.setCellType(CellType.BLANK);
                                                 value = cell.getStringCellValue();
                                             }
                                             value.trim();
