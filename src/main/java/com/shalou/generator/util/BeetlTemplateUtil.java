@@ -1,4 +1,4 @@
-package com.boco.generator.util;
+package com.shalou.generator.util;
 
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;

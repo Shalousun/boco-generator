@@ -1,4 +1,4 @@
-package com.boco.generator.annotation;
+package com.shalou.generator.annotation;
 
 /**
  * @author sunyu

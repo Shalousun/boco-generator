@@ -1,4 +1,4 @@
-package com.boco.generator.excel;
+package com.shalou.generator.excel;
 
 import com.power.poi.excel.ExcelPubUtil;
 import com.power.poi.excel.ExcelWorkBook;
@@ -50,16 +50,16 @@ public class ExcelToBootstrapTable {
                     builder.append("    columns: [");
                     int firstRowNum = sheet.getFirstRowNum(); // 第一行
                     int lastRowNum = sheet.getLastRowNum(); // 最后一行
-                    for(int rowNum = firstRowNum; rowNum <= lastRowNum; rowNum++){
-                        if(sheet.getRow(rowNum) != null){
+                    for (int rowNum = firstRowNum; rowNum <= lastRowNum; rowNum++) {
+                        if (sheet.getRow(rowNum) != null) {
                             Row row = sheet.getRow(rowNum);
                             short firstCellNum = row.getFirstCellNum(); // 该行的第一个单元格
                             short lastCellNum = row.getLastCellNum(); // 该行的最后一个单元格
                             //遍历每一个单元格
-                            for(short cellNum = firstCellNum; cellNum <= lastCellNum; cellNum++){
+                            for (short cellNum = firstCellNum; cellNum <= lastCellNum; cellNum++) {
                                 Cell cell = row.getCell(cellNum);
                                 CellType cellType = cell.getCellTypeEnum();
-                                if(null != cell){
+                                if (null != cell) {
                                     if (cellType == CellType.BLANK) {
                                         continue;
                                     } else {
@@ -67,49 +67,49 @@ public class ExcelToBootstrapTable {
                                         int cellRegionCol = ExcelPubUtil.getMergerCellRegionCol(sheet, rowNum, cellNum);
                                         ////合并的行（rowspan）
                                         int cellRegionRow = ExcelPubUtil.getMergerCellRegionRow(sheet, rowNum, cellNum);
-                                        if(cellRegionCol>0||cellRegionRow>0){
+                                        if (cellRegionCol > 0 || cellRegionRow > 0) {
                                             hasMerge = true;
                                             String value = "";
                                             if (cellType == CellType.BLANK) {
                                                 value = "";
-                                            }else{
+                                            } else {
                                                 cell.setCellType(CellType.STRING);
                                                 value = cell.getStringCellValue();
                                             }
-                                            if(cellNum==firstCellNum){
+                                            if (cellNum == firstCellNum) {
                                                 builder.append("[");
                                             }
-                                            if(cellRegionRow>0&&cellRegionCol==1){
+                                            if (cellRegionRow > 0 && cellRegionCol == 1) {
                                                 builder.append("{\n");
                                                 builder.append("        title:'").append(value).append("',\n");
                                                 builder.append("        field:'").append(cellNum).append("',\n");
                                                 builder.append("        rowspan:").append(cellRegionRow).append(",\n");
                                                 builder.append("        valign: 'middle',\n");
                                                 builder.append("        align:'center'\n");
-                                                if(cellNum+cellRegionCol<lastCellNum){
+                                                if (cellNum + cellRegionCol < lastCellNum) {
                                                     builder.append("    },");
-                                                }else{
+                                                } else {
                                                     builder.append("    }],[");
                                                 }
                                             }
-                                            if(cellRegionCol>0&&cellRegionRow==1){
+                                            if (cellRegionCol > 0 && cellRegionRow == 1) {
                                                 builder.append("{\n");
                                                 builder.append("        title:'").append(value).append("',\n");
                                                 builder.append("        colspan:").append(cellRegionCol).append(",\n");
                                                 builder.append("        align: 'center',\n");
-                                                if(cellNum+cellRegionCol<lastCellNum){
+                                                if (cellNum + cellRegionCol < lastCellNum) {
                                                     builder.append("    },");
-                                                }else{
+                                                } else {
                                                     builder.append("    }],[");
                                                 }
 
                                             }
                                             builder.append("");
-                                        }else{
+                                        } else {
                                             String value = "";
                                             if (cellType == CellType.BLANK) {
                                                 value = "";
-                                            }else{
+                                            } else {
                                                 cell.setCellType(CellType.BLANK);
                                                 value = cell.getStringCellValue();
                                             }
@@ -118,9 +118,9 @@ public class ExcelToBootstrapTable {
                                             builder.append("        title:'").append(value).append("',\n");
                                             builder.append("        field:'").append(cellNum).append("',\n");
                                             builder.append("        align:'center'\n");
-                                            if(cellNum<lastCellNum-1){
+                                            if (cellNum < lastCellNum - 1) {
                                                 builder.append("    },");
-                                            }else{
+                                            } else {
                                                 builder.append("    }");
                                             }
 
@@ -132,19 +132,19 @@ public class ExcelToBootstrapTable {
                         }
                     }
 
-                    if (',' == builder.charAt(builder.length() - 1)){
+                    if (',' == builder.charAt(builder.length() - 1)) {
                         builder = builder.deleteCharAt(builder.length() - 1);
                     }
-                    if(hasMerge){
+                    if (hasMerge) {
                         builder.append("]]\n");
-                    }else{
+                    } else {
                         builder.append("]\n");
                     }
                     builder.append("});\n");
-                    map.put(sheetName,builder);
+                    map.put(sheetName, builder);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return map;

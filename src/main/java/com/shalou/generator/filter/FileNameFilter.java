@@ -1,4 +1,4 @@
-package com.boco.generator.filter;
+package com.shalou.generator.filter;
 
 import java.io.File;
 import java.io.FilenameFilter;

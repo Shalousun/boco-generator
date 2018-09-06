@@ -1,6 +1,6 @@
-package com.boco.generator.model;
+package com.shalou.generator.model;
 
-import com.boco.generator.annotation.ExcelAnnotation;
+import com.shalou.generator.annotation.ExcelAnnotation;
 
 /**
  * excel 读取数据模型

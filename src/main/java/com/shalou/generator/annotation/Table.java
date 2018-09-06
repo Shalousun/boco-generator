@@ -1,4 +1,4 @@
-package com.boco.generator.annotation;
+package com.shalou.generator.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

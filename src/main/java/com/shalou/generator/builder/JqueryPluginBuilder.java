@@ -1,4 +1,4 @@
-package com.boco.generator.builder;
+package com.shalou.generator.builder;
 
 
 import com.power.common.util.DateTimeUtil;

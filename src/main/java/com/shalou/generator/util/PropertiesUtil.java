@@ -1,4 +1,4 @@
-package com.boco.generator.util;
+package com.shalou.generator.util;
 
 import java.io.IOException;
 import java.io.InputStream;
