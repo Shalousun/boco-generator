@@ -1,8 +1,8 @@
 package com.boco.generator;
 
 import com.boco.generator.util.BeetlTemplateUtil;
-import com.boco.generator.util.FileUtil;
 import com.boco.generator.util.PropertiesUtil;
+import com.power.common.util.FileUtil;
 import com.power.poi.excel.ExcelToHtml;
 import org.beetl.core.Template;
 
